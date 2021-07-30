@@ -7,8 +7,8 @@ Module.register("BitcoinTracker", {
   result: {},
   defaults: {
     currency: 'usd',
-    showPreviousTracker: null,
-    exchange: 'bitstamp',
+    text: null,
+    exchange: 'Bitcoin Price:',
     updateInterval: 60000,
 
     //table so we can get to the API url and get symbols for front end.
@@ -47,13 +47,10 @@ Module.register("BitcoinTracker", {
     var currency = this.config.currency;
     var currencySymbol = this.config.currencyType[currency].symbol;
     var lastPrice = data.last;
-    if (this.config.showPreviousTracker == null) {
-      var showPreviousTracker = this.config.exchange;
-    } else {
-      var showPreviousTracker = this.config.showPreviousTracker
-    }
+    var text = this.config.text
+    
     if (lastPrice) {
-      symbol.innerHTML = showPreviousTracker + ' ' + currencySymbol;
+      symbol.innerHTML = text + ' ' + currencySymbol;
       wrapper.appendChild(symbol);
       var price = document.createElement("span");
       price.innerHTML = lastPrice;
